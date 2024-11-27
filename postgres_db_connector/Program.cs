@@ -8,6 +8,15 @@ class Program
 
         Queries queries = new(db.Connection());
         
-        queries.AllItems();
+        // queries.AllItems();
+
+        while (true)
+        {   
+            Console.WriteLine("Skriv in ett id: ");
+            String id = Console.ReadLine();
+            queries.OneItemById(id);
+        }
+        
+        // queries.AllItemWithoutId();
     }
 }
