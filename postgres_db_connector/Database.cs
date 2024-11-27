@@ -9,8 +9,14 @@ public class Database
     private readonly string _username = "postgres";
     private readonly string _password = "abc123";
     private readonly string _database = "postgres_connector";
-    private readonly string _schema = "";
-
+    /*
+        Per default så använder man public-schemat, vill man ändra till ett annat schema 
+        lägger man till "SearchPath={schema_namn}" i slutet av Create-metodens Sträng.
+        
+        private readonly string _schema = "";
+        _connection = NpgsqlDataSource.Create($"Host={_host};Port={_port};Username={_username};Password={_password};Database={_database};SearchPath={_schema}");
+     */
+    
     private NpgsqlDataSource _connection;
 
     public NpgsqlDataSource Connection()
@@ -21,7 +27,7 @@ public class Database
     public Database()
     {
         _connection = NpgsqlDataSource.Create($"Host={_host};Port={_port};Username={_username};Password={_password};Database={_database}");
-
-        using var conn = _connection.OpenConnection();
+        
+        using var conn = _connection.OpenConnection(); // Kontrollerar att vi har lyckats kopplat upp oss till databasen.
     }
 }

@@ -13,9 +13,9 @@ public class Queries
 
     public async void AllItems()
     {
-        await using (var cmd = _database.CreateCommand("SELECT * FROM items"))
-        await using (var reader = await cmd.ExecuteReaderAsync())
-        while ( await reader.ReadAsync())
+        await using (var cmd = _database.CreateCommand("SELECT * FROM items")) // Skapa vårt kommand/query
+        await using (var reader = await cmd.ExecuteReaderAsync()) // Kör vår kommando/query och inväntar resultatet.
+        while ( await reader.ReadAsync()) // Läser av 1 rad/objekt i taget ifrån resultatet och kommer avsluta loopen när det inte finns fler rader att läsa. 
         {
             Console.WriteLine($"Id: {reader.GetInt32(0)}, " +
                               $"Name: {reader.GetString(1)}," +
